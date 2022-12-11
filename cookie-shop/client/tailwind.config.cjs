@@ -5,7 +5,11 @@ module.exports = {
     "./src/**/*.{js,jsx}",
   ],
   theme: {
-    extend: {},
+    extend: {
+      spacing: {
+        '80vh': '80vh',
+      }
+    },
   },
   plugins: [],
 }
