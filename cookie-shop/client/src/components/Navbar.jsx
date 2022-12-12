@@ -17,14 +17,14 @@ const Navbar = () => {
   }
 
   return (
-    <div className='sticky top-0 z-10 bg-neutral-50'>
+    <div className='sticky top-0 z-50 bg-neutral-50'>
       <div 
         className='flex w-5/6 mx-auto justify-between items-center border-b-2
         py-2'
       >
         <div 
           className='absolute top-full left-0 right-0  bg-neutral-50 transition-all
-          duration-500 -z-10'
+          duration-300 -z-10'
           style={{transform: `translateY(-${!navBar * 100}vh)`}}
         >
           <ul className='flex flex-col w-5/6 mx-auto py-2 gap-2'>

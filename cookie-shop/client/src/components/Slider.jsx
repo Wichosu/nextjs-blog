@@ -23,8 +23,8 @@ const Slider = () => {
   console.log(currentSlide)
 
   return (
-    <div className='relative h-3/4 -top-24 w-screen overflow-hidden'>
-      <div className='flex h-screen w-max transition-all duration-1000' style={{transform: `translateX(-${currentSlide * 100}vw)`}}>
+    <div className='relative h-full md:h-80vh w-screen overflow-hidden'>
+      <div className='flex h-full w-max transition-all duration-1000' style={{transform: `translateX(-${currentSlide * 100}vw)`}}>
         {data.map((img, index) => (
           <img key={index} className='w-screen object-cover' src={img} alt='' />
         ))}
