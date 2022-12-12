@@ -1,5 +1,5 @@
 import React from 'react';
-import Card from './Card';
+import Catalog from './Catalog';
 import FeaturedProducts from './FeaturedProducts';
 import Slider from './Slider';
 
@@ -8,6 +8,7 @@ const Home = () => {
     <div>
       <Slider />
       <FeaturedProducts type={'New'} />
+      <Catalog />
     </div>
   );
 }

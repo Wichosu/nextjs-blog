@@ -14,7 +14,7 @@ const FeaturedProducts = ({ type }) => {
 
   return (
     <div>
-      <h1 className='my-10 text-center text-2xl'>{ type } Products</h1>
+      <h1 className='my-10 text-center text-4xl'>{ type } Products</h1>
       <div className='flex flex-wrap w-screen justify-evenly gap-y-8 md:gap-x-8'>
         {items.map((item, index) => (
           <Card key={index} item={item} />

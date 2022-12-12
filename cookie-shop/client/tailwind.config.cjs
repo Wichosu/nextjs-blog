@@ -8,7 +8,11 @@ module.exports = {
     extend: {
       spacing: {
         '80vh': '80vh',
-      }
+      },
+      gridTemplateRows: {
+        'catalog': 'repeat(4, minmax(0, 8rem))',
+        'catalog-md': 'repeat(3, minmax(0, 4rem))',
+      },
     },
   },
   plugins: [],

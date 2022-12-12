@@ -17,7 +17,7 @@ const Navbar = () => {
   }
 
   return (
-    <div className='sticky top-0 z-20 bg-neutral-50'>
+    <div className='sticky top-0 z-50 bg-neutral-50'>
       <div 
         className='flex w-5/6 mx-auto justify-between items-center border-b-2
         py-2'

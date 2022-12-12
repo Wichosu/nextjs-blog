@@ -5,8 +5,8 @@ const Card = ({ item }) => {
 
   return (
     <Link className='w-5/12 md:w-64'>
-      <div className='flex flex-col border rounded border-neutral-200'>
-        <div className='w-full h-56 overflow-hidden relative'>
+      <div className='flex flex-col'>
+        <div className='w-full h-56 overflow-hidden relative rounded'>
           <img
             src='https://images.pexels.com/photos/6996314/pexels-photo-6996314.jpeg'
             alt=''
