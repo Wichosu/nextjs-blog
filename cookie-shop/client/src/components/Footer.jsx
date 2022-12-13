@@ -3,7 +3,10 @@ import React from 'react';
 const Footer = () => {
   return (
     <div className='bg-neutral-50' >
-      <div className='flex md:flex-row flex-col gap-8 justify-between items-center py-8 w-5/6 mx-auto'>
+      <div 
+        className='flex md:flex-row flex-col gap-8 justify-between items-center 
+        py-8 w-5/6 mx-auto'
+      >
         <div className='text-2xl'>
           <i className='bi bi-facebook mx-4'></i>
           <i className='bi bi-twitter mx-4'></i>
