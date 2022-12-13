@@ -12,7 +12,7 @@ const Footer = () => {
         </div>
         <div>
           <div className='flex items-center gap-4'>
-            <img className='w-12' src='./img/Cookie.svg' alt='Cookie shop logo' />
+            <img className='w-12' src='/img/Cookie.svg' alt='Cookie shop logo' />
             <p className='text-2xl'>Cookie Shop</p>
           </div>
         </div>
