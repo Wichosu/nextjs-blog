@@ -19,8 +19,7 @@ const Navbar = () => {
   return (
     <div className='sticky top-0 z-50 bg-neutral-50'>
       <div 
-        className='flex w-5/6 mx-auto justify-between items-center border-b-2
-        py-2'
+        className='flex w-5/6 mx-auto justify-between items-center py-2'
       >
         <div 
           className='absolute top-full left-0 right-0  bg-neutral-50 transition-all
@@ -43,7 +42,7 @@ const Navbar = () => {
           <i className='bi bi-list'></i> 
         </div>
         <div className='flex items-center gap-4'>
-          <img className='w-12' src='./img/Cookie.svg' alt='Cookie shop logo' />
+          <img className='w-12' src='/img/Cookie.svg' alt='Cookie shop logo' />
           <p className='text-2xl'>Cookie Shop</p>
         </div>
         <ul className='w-fit mx-auto hidden md:block'>
