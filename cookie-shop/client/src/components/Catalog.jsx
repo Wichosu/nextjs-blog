@@ -19,6 +19,7 @@ const Catalog = () => {
           <Link 
             className='absolute top-1/2 -translate-y-1/2 left-0 right-0 text-center bg-neutral-100
             w-fit mx-auto px-4 py-1 rounded-sm '
+            to='/products/butter'
           >
             Butter
           </Link>
@@ -28,6 +29,7 @@ const Catalog = () => {
           <Link 
             className='absolute top-1/2 -translate-y-1/2 left-0 right-0 text-center bg-neutral-100
             w-fit mx-auto px-4 py-1 rounded-sm '
+            to='/products/chocolate-chips'
           >
             Chocolate Chips
           </Link>
@@ -37,6 +39,7 @@ const Catalog = () => {
           <Link 
             className='absolute top-1/2 -translate-y-1/2 left-0 right-0 text-center bg-neutral-100
             w-fit mx-auto px-4 py-1 rounded-sm '
+            to='/products/lemon'
           >
             Lemon
           </Link>
@@ -46,6 +49,7 @@ const Catalog = () => {
           <Link 
             className='absolute top-1/2 -translate-y-1/2 left-0 right-0 text-center bg-neutral-100
             w-fit mx-auto px-4 py-1 rounded-sm '
+            to='/products/macarons'
           >
             Macarons
           </Link>         

@@ -4,9 +4,9 @@ import { Link } from 'react-router-dom';
 const Navbar = () => {
 
   const links = [
-    { name: 'All Cookies', link: '/'},
-    { name: 'Butter', link: '/'},
-    { name: 'Chocolate Chips', link: '/'},
+    { name: 'All Cookies', link: '/products/all'},
+    { name: 'Butter', link: '/products/butter'},
+    { name: 'Chocolate Chips', link: '/products/chocolate-chips'},
     { name: 'About Us', link: '/'}
   ]
 
@@ -23,7 +23,7 @@ const Navbar = () => {
       >
         <div 
           className='absolute top-full left-0 right-0  bg-neutral-50 transition-all
-          duration-300 -z-10'
+          duration-300 -z-10 lg:hidden'
           style={{transform: `translateY(-${!navBar * 100}vh)`}}
         >
           <ul className='flex flex-col w-5/6 mx-auto py-2 gap-2'>
@@ -32,6 +32,7 @@ const Navbar = () => {
                 key={index}
                 className={`transition-all ${navBar? 'duration-700' : 'duration-75'}`} 
                 style={{opacity: `${navBar * 1}`}}
+                to={link.link}
               >
                 {link.name}
               </Link>
@@ -41,15 +42,16 @@ const Navbar = () => {
         <div className='text-2xl md:hidden' onClick={toggleNavBar}>
           <i className='bi bi-list'></i> 
         </div>
-        <div className='flex items-center gap-4'>
+        <Link to='/' className='flex items-center gap-4'>
           <img className='w-12' src='/img/Cookie.svg' alt='Cookie shop logo' />
           <p className='text-2xl'>Cookie Shop</p>
-        </div>
+        </Link>
         <ul className='w-fit mx-auto hidden md:block'>
           { links.map((link, index) => (
             <Link 
               key={index}
               className='mx-8' 
+              to={link.link}
             >
               {link.name}
             </Link>

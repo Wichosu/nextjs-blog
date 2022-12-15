@@ -20,8 +20,6 @@ const Slider = () => {
     setCurrentSlide(currentSlide === (data.length - 1) ? 0 : (prev) => prev + 1);
   }
 
-  console.log(currentSlide)
-
   return (
     <div className='relative md:h-80vh w-full overflow-hidden'>
       <div className='flex w-max transition-all duration-1000' style={{transform: `translateX(-${currentSlide * 100}vw)`}}>
