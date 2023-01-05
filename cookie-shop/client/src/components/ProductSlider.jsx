@@ -13,9 +13,9 @@ const ProductSlider = () => {
   const [mainImg, setMainImg] = useState(data[0]);
 
   return (
-    <div className='relative'>
-      <img className='object-cover' src={mainImg} alt='' />
-      <div className='absolute flex w-screen justify-evenly top-3/4 h-12'>
+    <div className='relative w-full'>
+      <img className='object-cover w-full md:h-80vh' src={mainImg} alt='' />
+      <div className='absolute flex w-full justify-evenly top-3/4 h-12'>
         { data.map((img, index) => (
           <img 
             className='w-12 h-12 border-2 cursor-pointer hover:border-orange-200 rounded-full'
