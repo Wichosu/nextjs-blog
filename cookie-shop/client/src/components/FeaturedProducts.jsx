@@ -1,5 +1,6 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import Card from './Card';
+import axios from 'axios';
 
 const FeaturedProducts = ({ type }) => {
 
@@ -11,6 +12,22 @@ const FeaturedProducts = ({ type }) => {
     {title: 'Cookie', desc: '$7'},
     {title: 'Cookie', desc: '$7'}
   ]
+
+  useEffect(() => {
+    const fetchData = async () => {
+      try{
+        const data = await axios.get(process.env.REACT_APP_API_URL + '/products', {
+          headers: {
+            Authorization: 'bearer ' + process.env.REACT_APP_API_TOKEN,
+          },
+        });
+        console.log(data);
+      } catch(err) {
+        console.log(err);
+      }
+    };
+    fetchData();
+  }, [])
 
   return (
     <div className='mx-auto'>
