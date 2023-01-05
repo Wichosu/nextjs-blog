@@ -1,7 +1,18 @@
-import React from 'react';
+import React, { useState } from 'react';
 import ProductSlider from '../components/ProductSlider';
 
 const Product = () => {
+
+  const [quantity, setQuantity] = useState(1);
+
+  const reduceQuantity = () => {
+    if(quantity > 1) setQuantity(quantity - 1);
+  }
+
+  const increaseQuantity = () => {
+    setQuantity(quantity + 1);
+  }
+
   return (
     <div>
       <ProductSlider />
@@ -18,9 +29,9 @@ const Product = () => {
         magna velit quis fugiat nostrud ipsum officia voluptate commodo in veniam ex anim.
       </p>
       <div className='flex justify-between items-center w-fit mx-auto'>
-        <i className='bi bi-dash-lg text-orange-500 text-2xl'></i>
-        <input  className='w-20 mx-8' type='text' placeholder='1' />
-        <i className='bi bi-plus-lg text-orange-500 text-2xl'></i>
+        <i className='bi bi-dash-lg text-orange-500 text-2xl' onClick={reduceQuantity}></i>
+        <input  className='w-20 mx-8' type='text' placeholder={quantity} />
+        <i className='bi bi-plus-lg text-orange-500 text-2xl' onClick={increaseQuantity}></i>
       </div>
       <button></button>
     </div>
