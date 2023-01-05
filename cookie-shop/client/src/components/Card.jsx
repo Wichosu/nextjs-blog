@@ -4,7 +4,7 @@ import { Link } from 'react-router-dom';
 const Card = ({ item }) => {
 
   return (
-    <Link className='w-5/12 md:w-64'>
+    <Link className='w-5/12 md:w-64' to={`/product/${item}`}>
       <div className='flex flex-col'>
         <div className='w-full h-56 overflow-hidden relative rounded'>
           <img

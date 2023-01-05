@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
+import Cart from './Cart';
 
 const Navbar = () => {
 
@@ -11,6 +12,7 @@ const Navbar = () => {
   ]
 
   const [navBar, setNavBar] = useState(false);
+  const [open, setOpen] = useState(false);
 
   const toggleNavBar = () => {
     setNavBar(!navBar);
@@ -57,7 +59,7 @@ const Navbar = () => {
             </Link>
           ))}
         </ul>
-        <div className='relative'>
+        <div className='relative' onClick={() => setOpen(!open)}>
           <i className='bi bi-cart-fill'></i>
           <span 
             className='absolute -top-2 -right-3 bg-orange-300 text-neutral-100 rounded-full
@@ -67,6 +69,7 @@ const Navbar = () => {
           </span>
         </div>
       </div>
+      {open && <Cart />}
     </div>
   );
 }
