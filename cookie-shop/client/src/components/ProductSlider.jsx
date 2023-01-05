@@ -14,7 +14,7 @@ const ProductSlider = () => {
 
   return (
     <div className='relative'>
-      <img src={mainImg} alt='' />
+      <img className='object-cover' src={mainImg} alt='' />
       <div className='absolute flex w-screen justify-evenly top-3/4 h-12'>
         { data.map((img, index) => (
           <img 
