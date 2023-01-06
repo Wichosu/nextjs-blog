@@ -12,8 +12,8 @@ const Products = () => {
 
   const [showFilter, setShowFilter] = useState(false);
   const [categories, setCategories] = useState([]);
-  const [maxPrice, setMaxPrice] = useState();
-  const [minPrice, setMinPrice] = useState();
+  const [maxPrice, setMaxPrice] = useState(1000);
+  const [minPrice, setMinPrice] = useState(0);
 
   const handleFilter = () => {
     setShowFilter(!showFilter);
@@ -32,12 +32,16 @@ const Products = () => {
 
   const handleMaxPrice = (e) => {
     const value = e.target.value;
-    setMaxPrice(value);
+    if(value > minPrice){
+      setMaxPrice(value);
+    }
   }
 
   const handleMinPrice = (e) => {
     const value = e.target.value;
-    setMinPrice(value);
+    if(value < maxPrice){
+      setMinPrice(value);
+    }
   }
 
   return (

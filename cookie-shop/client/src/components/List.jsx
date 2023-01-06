@@ -7,7 +7,7 @@ const List = ({ maxPrice, minPrice, categories}) => {
   const {data, loading, error} = useFetch(
     `/products?populate=*${categories.map(
       (item) => `&filters[categories][title][$eq]=${item}&`
-    )}`
+    )}&filters[price][$lte]=${maxPrice}&filters[price][$gte]=${minPrice}`
   )
 
   console.log(data)
