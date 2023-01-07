@@ -5,9 +5,9 @@ import Cart from './Cart';
 const Navbar = () => {
 
   const links = [
-    { name: 'All Cookies', link: '/products/all'},
-    { name: 'Butter', link: '/products/butter'},
-    { name: 'Chocolate Chips', link: '/products/chocolate-chips'},
+    { name: 'All Cookies', link: '/products/'},
+    { name: 'Butter', link: '/products/'},
+    { name: 'Chocolate Chips', link: '/products/'},
     { name: 'About Us', link: '/'}
   ]
 

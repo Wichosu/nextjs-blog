@@ -1,15 +1,11 @@
-import React, { useState, useEffect } from 'react';
-import { useParams } from 'react-router-dom';
-import FeaturedProducts from '../components/FeaturedProducts';
+import React, { useState } from 'react';
 import List from '../components/List';
 import useFetch from '../hooks/useFetch';
 
 const Products = () => {
-  const catTitle = useParams().id;
-  // const {data, loading, error} = useFetch(`/products?filters[categories][title][$eq]=${catTitle}`)
-
   const {data, loading, error} = useFetch('/categories?populate=*');
 
+  console.log(data)
   const [showFilter, setShowFilter] = useState(false);
   const [categories, setCategories] = useState([]);
   const [maxPrice, setMaxPrice] = useState(1000);
@@ -32,6 +28,10 @@ const Products = () => {
 
   const handleMaxPrice = (e) => {
     const value = e.target.value;
+    if(value === ''){
+      setMaxPrice(999);
+      return
+    }
     if(value > minPrice){
       setMaxPrice(value);
     }
@@ -39,9 +39,13 @@ const Products = () => {
 
   const handleMinPrice = (e) => {
     const value = e.target.value;
+    if(value === ''){
+      setMinPrice(0);
+      return
+    }
     if(value < maxPrice){
       setMinPrice(value);
-    }
+    } 
   }
 
   return (
@@ -78,12 +82,18 @@ const Products = () => {
                   name={item.attributes?.title} 
                   onChange={handleChange}
                 />
-                <label htmlFor={item.attributes?.title}>{item.attributes?.title}({item.attributes?.stock})</label>
+                <label 
+                  htmlFor={item.attributes?.title}
+                >
+                  {item.attributes?.title}({item.attributes?.products?.data?.length})
+                </label>
               </div>
             ))}
           </div>
           <div className='flex items-center gap-6'>
-            <button className='text-lg px-4 py-1 bg-orange-300 rounded uppercase hover:shadow-lg '>
+            <button 
+              className='text-lg px-4 py-1 bg-orange-300 rounded uppercase hover:shadow-lg '
+            >
               apply filter
             </button>
             <button className='text-lg'>

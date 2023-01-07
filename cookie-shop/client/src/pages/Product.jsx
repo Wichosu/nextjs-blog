@@ -1,7 +1,12 @@
 import React, { useState } from 'react';
 import ProductSlider from '../components/ProductSlider';
+import { useParams } from 'react-router-dom';
+import useFetch from '../hooks/useFetch';
 
 const Product = () => {
+  const catId = useParams().id;
+
+  const {data, loading, error} = useFetch(`/products/${catId}?populate=*`);
 
   const [quantity, setQuantity] = useState(1);
 
@@ -19,16 +24,13 @@ const Product = () => {
       <div className='flex flex-col gap-6 justify-center'>
         <div className='flex flex-col gap-4 mx-6'>
           <h2 className='text-4xl'>
-            Titulo
+            {data.attributes?.title}
           </h2>
           <h3 className='text-xl'>
-            $Precio
+            ${data.attributes?.price}
           </h3>
           <p>
-            Sint fugiat voluptate ex in ipsum. Quis irure exercitation sunt sint incididunt nisi 
-            cupidatat. Occaecat incididunt minim duis consectetur exercitation. Sunt dolor magna 
-            voluptate nisi Lorem eiusmod sunt veniam. Do anim consectetur quis tempor commodo. Officia 
-            magna velit quis fugiat nostrud ipsum officia voluptate commodo in veniam ex anim.
+            {data.attributes?.description}
           </p>
         </div>
         <div className='flex justify-between items-center w-fit mx-auto md:mx-6'>

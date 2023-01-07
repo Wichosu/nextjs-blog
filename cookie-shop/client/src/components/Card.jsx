@@ -4,18 +4,18 @@ import { Link } from 'react-router-dom';
 const Card = ({ item }) => {
 
   return (
-    <Link className='w-5/12 md:w-64' to={`/product/${item}`}>
+    <Link className='w-5/12 md:w-64' to={`/product/${item.id}`}>
       <div className='flex flex-col'>
         <div className='w-full h-56 overflow-hidden relative rounded'>
           <img
             src={import.meta.env.VITE_API_UPLOAD_URL + item.attributes?.img?.data?.attributes?.url}
             alt=''
-            className='absolute z-10 h-full object-cover hover:-z-20'
+            className='absolute z-10 w-full h-full object-cover hover:-z-20'
           />
           <img
             src={import.meta.env.VITE_API_UPLOAD_URL + item.attributes?.img2?.data?.attributes?.url}
             alt=''
-            className='absolute h-full object-cover hover:z-20'
+            className='absolute h-full w-full object-cover hover:z-20'
           />
         </div>
         <div className='flex items-center justify-between'>

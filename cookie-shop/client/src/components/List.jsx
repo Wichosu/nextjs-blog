@@ -10,8 +10,6 @@ const List = ({ maxPrice, minPrice, categories}) => {
     )}&filters[price][$lte]=${maxPrice}&filters[price][$gte]=${minPrice}`
   )
 
-  console.log(data)
-
   return (
     <div className='mx-auto flex flex-wrap w-full justify-evenly gap-y-8 md:gap-x-8'>
       {loading
