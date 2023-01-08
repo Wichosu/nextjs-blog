@@ -2,9 +2,14 @@ import React, { useState } from 'react';
 import ProductSlider from '../components/ProductSlider';
 import { useParams } from 'react-router-dom';
 import useFetch from '../hooks/useFetch';
+import useStore from '../zustand/cart';
 
 const Product = () => {
   const catId = useParams().id;
+  const addToCart = useStore((state) => state.addItem);
+  const items = useStore((state) => state.items);
+  const updateItems = useStore((state) => state.updateItems);
+  console.log(items);
 
   const {data, loading, error} = useFetch(`/products/${catId}?populate=*`);
 
@@ -16,6 +21,16 @@ const Product = () => {
 
   const increaseQuantity = () => {
     setQuantity(quantity + 1);
+  }
+
+  const handleCart = (item) => {
+    const foundItem = items.find((oldItem) => oldItem.id === item.id);
+    if(foundItem) {
+      foundItem.quantity += item.quantity;
+      updateItems();
+    } else {
+      addToCart(item);
+    }
   }
 
   return (
@@ -40,7 +55,18 @@ const Product = () => {
           </div>
           <i className='bi bi-plus-lg text-orange-500 text-2xl' onClick={increaseQuantity}></i>
         </div>
-        <button className='bg-orange-200 px-12 py-2 rounded w-fit mx-auto md:mx-6'>Add</button>
+        <button 
+          className='bg-orange-200 px-12 py-2 rounded w-fit mx-auto md:mx-6'
+          onClick={() => handleCart({
+            id: data.id,
+            quantity: quantity,
+            title: data.attributes?.title,
+            img: import.meta.env.VITE_API_UPLOAD_URL + data.attributes?.img?.data?.attributes?.url,
+            price: data.attributes?.price
+          })}
+        >
+          Add
+        </button>
       </div>
     </div>
   );
