@@ -1,6 +1,8 @@
 import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
 import useStore from '../zustand/cart';
+import { loadStripe } from '@stripe/stripe-js';
+import { makeRequest } from '../makeRequest';
 
 const Cart = () => {
   const items = useStore((state) => state.items);
@@ -12,6 +14,25 @@ const Cart = () => {
       total += item.quantity * item.price;
     });
     return total.toFixed(2);
+  }
+
+  const stripePromise = loadStripe('pk_test_51MBVqNCw4gc6zzKjB2pTGxEqBeUOjJtl8uWMFPD9azVfkYfUvLxe86TfNQejFpNCaQX1VdxF9RUUL9R61J9fRHg900RIUF5maH');
+
+  const handlePayment = async () => {
+    try{
+      const stripe = await stripePromise;
+
+      const res = await makeRequest.post('/orders', {
+        items,
+      });
+      console.log(res)
+
+      await stripe.redirectToCheckout({
+        sessionId: res.data.stripeSession.id,
+      });
+    } catch(err){
+      console.log(err);
+    }
   }
 
   return (
@@ -39,7 +60,10 @@ const Cart = () => {
           <div>
             Subtotal: ${totalPrice()}
           </div>
-          <button className='bg-orange-200 rounded px-8 py-2'>
+          <button 
+            onClick={handlePayment}
+            className='bg-orange-200 rounded px-8 py-2'
+          >
             Checkout
           </button>
         </>

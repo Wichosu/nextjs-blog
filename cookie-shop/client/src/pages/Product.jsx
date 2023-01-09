@@ -9,7 +9,6 @@ const Product = () => {
   const addToCart = useStore((state) => state.addItem);
   const items = useStore((state) => state.items);
   const updateItems = useStore((state) => state.updateItems);
-  console.log(items);
 
   const {data, loading, error} = useFetch(`/products/${catId}?populate=*`);
 
