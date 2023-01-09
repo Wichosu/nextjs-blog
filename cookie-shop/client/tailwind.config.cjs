@@ -8,6 +8,8 @@ module.exports = {
     extend: {
       spacing: {
         '80vh': '80vh',
+        '90vh': '90vh',
+        '50vw': '50vw'
       },
       gridTemplateRows: {
         'catalog': 'repeat(4, minmax(0, 8rem))',

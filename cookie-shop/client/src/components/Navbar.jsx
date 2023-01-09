@@ -1,16 +1,19 @@
 import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
+import Cart from './Cart';
+import useStore from '../zustand/cart';
 
 const Navbar = () => {
 
+  const items = useStore((state) => state.items);
+
   const links = [
-    { name: 'All Cookies', link: '/products/all'},
-    { name: 'Butter', link: '/products/butter'},
-    { name: 'Chocolate Chips', link: '/products/chocolate-chips'},
+    { name: 'All Cookies', link: '/products/'},
     { name: 'About Us', link: '/'}
   ]
 
   const [navBar, setNavBar] = useState(false);
+  const [open, setOpen] = useState(false);
 
   const toggleNavBar = () => {
     setNavBar(!navBar);
@@ -57,16 +60,17 @@ const Navbar = () => {
             </Link>
           ))}
         </ul>
-        <div className='relative'>
+        <div className='relative cursor-pointer' onClick={() => setOpen(!open)}>
           <i className='bi bi-cart-fill'></i>
           <span 
             className='absolute -top-2 -right-3 bg-orange-300 text-neutral-100 rounded-full
             w-5 h-5 flex justify-center items-center'
           >
-          0
+          {items.length}
           </span>
         </div>
       </div>
+      {open && <Cart />}
     </div>
   );
 }
