@@ -4,7 +4,7 @@ import client from '../client';
 import Image from 'next/image';
 import profilePic from '../public/examen1.png'; //temp profile pic
 import imageUrlBuilder from '@sanity/image-url';
-import Footer from '../components/Footer';
+import styles from '../styles/index.module.scss';
 
 function urlFor(source) {
   return imageUrlBuilder(client).image(source)
@@ -12,40 +12,64 @@ function urlFor(source) {
 
 const Index = ({posts}) => {
   return (
-    <div>
-      <h1>Thoughts on my projects</h1>
-      <h2>A personal sight on what I've developed</h2>
-      <div>
+    <div className={styles.index}>
+      <div className={styles.title}>
+        <h1>Thoughts on my projects</h1>
+        <h2>A personal sight on what I've developed</h2>
+      </div>
+      <div className={styles.hero}>
         <Image
           src={profilePic} 
           alt="Picture of Luis Eduardo Calderón Miranda"
+          className={styles.image}
         />
-        <h3>Luis Eduardo Calderón Miranda (aka Wicho)</h3>
-        <p>A web developer who tries to improve its skills by building tiny projects</p>
+        <div>
+          <h3>Luis Eduardo Calderón Miranda (aka Wicho)</h3>
+          <p>A web developer who tries to improve its skills by building tiny projects</p>
+        </div>
       </div>
-      {posts.length > 0 && posts.map(
-        ({ _id, title = '', author = '', categories = '', slug = '', mainImage = '', publishedAt = '' }) => 
-          slug && (
-            <div key={_id}>
-              <img 
-                src={urlFor(mainImage)} 
-                alt='Image of the project'
-              />
-              <div>
-                <p>{author}</p>
-                <p>{new Date(publishedAt).toDateString()}</p>
+      {posts.length > 0 && 
+        <div className={styles.cardContainer}>
+        {
+          posts.map(
+          ({_id,
+            title = '',
+            author = '',
+            categories = '',
+            slug = '',
+            mainImage = '', 
+            publishedAt = '',
+            description = '' }) => 
+            slug && (
+              <div 
+                key={_id}
+                className={styles.card}
+              >
+                <img 
+                  src={urlFor(mainImage)} 
+                  alt='Image of the project'
+                />
+                <div>
+                  <h5>{author}</h5>
+                  <p>{new Date(publishedAt).toDateString()}</p>
+                </div>
+                <Link 
+                  href='/post/[slug]' 
+                  as={`/post/${slug.current}`}
+                  className={styles.link}
+                >
+                  {title}
+                </Link>
+                <p>{description}</p>
+                <ul>
+                  {categories.map(category => <li key={category}>{category}</li>)}
+                </ul>
               </div>
-              <Link href='/post/[slug]' as={`/post/${slug.current}`}>
-                {title}
-              </Link>
-              {/*Missing description*/}
-              <ul>
-                {categories.map(category => <li key={category}>{category}</li>)}
-              </ul>
-            </div>
+            )
           )
-      )}
-      <Footer />
+        }
+        </div>
+      }
     </div>
   )
 }
@@ -59,7 +83,8 @@ export async function getStaticProps(){
       mainImage,
       slug,
       publishedAt,
-      "categories": categories[]->title
+      "categories": categories[]->title,
+      description
     } | order(publishedAt desc)`
   )
   
