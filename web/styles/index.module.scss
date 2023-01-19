@@ -60,12 +60,46 @@
       div{
         display: flex;
         gap: 0 1rem;
+        align-items: center;
+        color: #222;
+        font-size: 0.75rem;
       }
 
       .link{
-        color: #222;
+        position: relative;
+        color: #1e40af;
         text-decoration: none;
         font-size: 1.75rem;
+
+        &::after{
+          content: '';
+          position: absolute;
+          top: 50%;
+          right: 0;
+          transform: translateY(-50%) rotate(45deg);
+          width: 0.5rem;
+          height: 0.5rem;
+          border: solid #1e40af;
+          border-width: 3px 3px 0px 0px;
+        }
+      }
+
+      .description{
+        text-overflow: ellipsis;
+        font-size: 1rem;
+      }
+
+      ul{
+        display: flex;
+        gap: 1rem;
+        color: #222;
+        font-size: 0.75rem;
+
+        li{
+          list-style: none;
+          border: 1px solid #444;
+          padding: 0.5rem 1rem;
+        }
       }
     }
   }

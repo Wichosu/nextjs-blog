@@ -50,7 +50,8 @@ const Index = ({posts}) => {
                   alt='Image of the project'
                 />
                 <div>
-                  <h5>{author}</h5>
+                  <h4>{author}</h4>
+                  |
                   <p>{new Date(publishedAt).toDateString()}</p>
                 </div>
                 <Link 
@@ -60,7 +61,7 @@ const Index = ({posts}) => {
                 >
                   {title}
                 </Link>
-                <p>{description}</p>
+                <p className={styles.description}>{description}</p>
                 <ul>
                   {categories.map(category => <li key={category}>{category}</li>)}
                 </ul>
