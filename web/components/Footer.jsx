@@ -1,8 +1,8 @@
+import styles from '../styles/footer.module.scss'
 
 const Footer = () => {
   return (
-    <footer>
-      <hr />
+    <footer className={styles.footer}>
       <h1>Let's work together on something</h1>
       <ul>
       {/*Use The Image component and get social media logos locally*/}
