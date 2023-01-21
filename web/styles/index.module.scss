@@ -1,3 +1,8 @@
+$white: #f9fafb;
+$link: #1d4ed8; //blue 800 tailwind
+$hard-black: #111827;
+$soft-black: #374151;
+
 .index{
   display: flex;
   flex-direction: column;
@@ -35,7 +40,7 @@
       gap: 1rem;
   
       h3, p{
-        color: whitesmoke;
+        color: $white; 
       }
     }
   }
@@ -61,27 +66,15 @@
         display: flex;
         gap: 0 1rem;
         align-items: center;
-        color: #222;
+        color: $hard-black;
         font-size: 0.75rem;
       }
 
       .link{
         position: relative;
-        color: #1e40af;
+        color: $link;
         text-decoration: none;
         font-size: 1.75rem;
-
-        &::after{
-          content: '';
-          position: absolute;
-          top: 50%;
-          right: 0;
-          transform: translateY(-50%) rotate(45deg);
-          width: 0.5rem;
-          height: 0.5rem;
-          border: solid #1e40af;
-          border-width: 3px 3px 0px 0px;
-        }
       }
 
       .description{
@@ -92,12 +85,12 @@
       ul{
         display: flex;
         gap: 1rem;
-        color: #222;
+        color: $hard-black;
         font-size: 0.75rem;
 
         li{
           list-style: none;
-          border: 1px solid #444;
+          border: 1px solid $soft-black;
           padding: 0.5rem 1rem;
         }
       }
