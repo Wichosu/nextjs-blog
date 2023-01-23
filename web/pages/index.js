@@ -4,6 +4,7 @@ import client from '../client';
 import Image from 'next/image';
 import profilePic from '../public/examen1.png'; //temp profile pic
 import imageUrlBuilder from '@sanity/image-url';
+import Arrow from '../public/Arrow.svg';
 import styles from '../styles/index.module.scss';
 
 function urlFor(source) {
@@ -55,11 +56,16 @@ const Index = ({posts}) => {
                   <p>{new Date(publishedAt).toDateString()}</p>
                 </div>
                 <Link 
-                  href='/post/[slug]' 
+                  href='/post/[slug]'
                   as={`/post/${slug.current}`}
                   className={styles.link}
                 >
                   {title}
+                  <Image 
+                    src={Arrow}
+                    alt={`go to project: ${title}`}
+                    className={styles.arrow}
+                  />
                 </Link>
                 <p className={styles.description}>{description}</p>
                 <ul>

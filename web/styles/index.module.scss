@@ -75,7 +75,17 @@ $soft-black: #374151;
         color: $link;
         text-decoration: none;
         font-size: 1.75rem;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+
+        .arrow{
+          width: 1.25rem;
+          height: 1.25rem;
+          transform: rotate(-45deg);
+        }
       }
+
 
       .description{
         text-overflow: ellipsis;
@@ -91,7 +101,7 @@ $soft-black: #374151;
         li{
           list-style: none;
           border: 1px solid $soft-black;
-          padding: 0.5rem 1rem;
+          padding: 0.25rem 0.75rem;
         }
       }
     }

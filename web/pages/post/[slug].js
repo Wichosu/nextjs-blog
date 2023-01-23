@@ -2,6 +2,10 @@ import client from '../../client';
 import groq from 'groq';
 import imageUrlBuilder from '@sanity/image-url';
 import { PortableText } from '@portabletext/react';
+import Link from 'next/link';
+import styles from '../../styles/post.module.scss';
+import Image from 'next/image';
+import Arrow from '../../public/Arrow.svg';
 
 function urlFor(source) {
   return imageUrlBuilder(client).image(source)
@@ -29,30 +33,40 @@ const Post = ({post}) => {
     title = 'Missing title', 
     name = 'Missing name', 
     categories,
-    authorImage,
+    mainImage,
     body = []
   } = post
 
   return (
-    <article>
-      <h1>{title}</h1>
-      <span>By {name}</span>
-      {categories && (
-        <ul>
-          Posted in
-          {categories.map(category => <li key={category}>{category}</li>)}
-        </ul>
-      )}
-      {authorImage && (
-        <div>
+    <article className={styles.article}>
+      <div className={styles.titleContainer}>
+        <Link href='/'>
+          <Image 
+            src={Arrow} 
+            alt='Go back'
+            className={styles.arrow}
+          />
+        </Link>
+        <div className={styles.title}>
+          <h1>{title}</h1>
+          <span>By {name}</span>
+        </div>
+      </div>
+      <div className={styles.hero}>
+        {categories && (
+          <ul>
+            {categories.map(category => <li key={category}>{category}</li>)}
+          </ul>
+        )}
+        {mainImage && (
           <img
-            src={urlFor(authorImage)
+            src={urlFor(mainImage)
               .width(50)
               .url()}
-            alt={`${name}'s picture`}
+            alt={`project's picture`}
           />
-        </div>
-      )}
+        )}
+      </div>
       <PortableText
         value={body}
         components={ptComponents}
@@ -65,7 +79,7 @@ const query = groq`*[_type == "post" && slug.current == $slug][0]{
   title,
   "name": author->name,
   "categories": categories[]->title,
-  "authorImage": author->image,
+  mainImage,
   body
 }`
 
