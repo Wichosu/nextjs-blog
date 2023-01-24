@@ -1,4 +1,5 @@
 $soft-black: #374151;
+$link: #1d4ed8;
 
 .article{
   margin-top: 1.5rem;
@@ -25,6 +26,12 @@ $soft-black: #374151;
     span{
       font-size: 1rem;
     }
+
+    .link{
+      font-size: 1rem;
+      text-decoration: none;
+      color: $link;
+    }
   }
 
 
@@ -40,7 +47,7 @@ $soft-black: #374151;
       li{
         width: fit-content;
         list-style: none;
-        border: 1px solid gray;
+        border: 1px solid $soft-black;
         padding: 0.25rem 0.75rem;
       }
     }

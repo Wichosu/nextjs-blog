@@ -53,6 +53,11 @@ export default defineType({
       name: 'description',
       title: 'Description',
       type: 'string'
+    }),
+    defineField({
+      name: 'url',
+      title: 'Url',
+      type: 'string'
     })
   ],
 

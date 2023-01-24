@@ -34,22 +34,29 @@ const Post = ({post}) => {
     name = 'Missing name', 
     categories,
     mainImage,
-    body = []
+    body = [],
+    url
   } = post
 
   return (
     <article className={styles.article}>
-      <div className={styles.titleContainer}>
-        <Link href='/'>
-          <Image 
-            src={Arrow} 
-            alt='Go back'
-            className={styles.arrow}
-          />
-        </Link>
+      <div>
+        <div>
+          <Link href='/'>
+            <Image 
+              src={Arrow} 
+              alt='Go back'
+              className={styles.arrow}
+            />
+          </Link>
+        </div>
         <div className={styles.title}>
           <h1>{title}</h1>
           <span>By {name}</span>
+          {url
+          ? <Link href={url} target="_blank" className={styles.link}>Check it out!</Link>
+          : <span>Deploy not available</span>
+          }
         </div>
       </div>
       <div className={styles.hero}>
@@ -80,7 +87,8 @@ const query = groq`*[_type == "post" && slug.current == $slug][0]{
   "name": author->name,
   "categories": categories[]->title,
   mainImage,
-  body
+  body,
+  url
 }`
 
 export async function getStaticPaths(){

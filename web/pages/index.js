@@ -40,7 +40,8 @@ const Index = ({posts}) => {
             slug = '',
             mainImage = '', 
             publishedAt = '',
-            description = '' }) => 
+            description = '',
+            url = '' }) => 
             slug && (
               <div 
                 key={_id}
@@ -58,7 +59,7 @@ const Index = ({posts}) => {
                 <Link 
                   href='/post/[slug]'
                   as={`/post/${slug.current}`}
-                  className={styles.link}
+                  className={styles.linkPost}
                 >
                   {title}
                   <Image 
@@ -71,6 +72,10 @@ const Index = ({posts}) => {
                 <ul>
                   {categories.map(category => <li key={category}>{category}</li>)}
                 </ul>
+                {url
+                ? <Link href={url} target="_blank" className={styles.linkDeploy}>Check it out!</Link>
+                : <span>Deploy not available</span>
+                }
               </div>
             )
           )
@@ -91,7 +96,8 @@ export async function getStaticProps(){
       slug,
       publishedAt,
       "categories": categories[]->title,
-      description
+      description,
+      url
     } | order(publishedAt desc)`
   )
   
