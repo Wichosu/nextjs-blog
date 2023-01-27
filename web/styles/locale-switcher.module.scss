@@ -1,0 +1,18 @@
+$hover-link: #3b82f6;
+$link: #1d4ed8;
+
+.button{
+  width: fit-content;
+  align-self: center;
+  margin: 1rem 0;
+  padding: 0.25rem 0.75rem;
+  border: 1px solid $link;
+  background-color: transparent;
+  color: $link;
+  cursor: pointer;
+
+  &:hover{
+    color: $hover-link;
+    border-color: $hover-link;
+  }
+}

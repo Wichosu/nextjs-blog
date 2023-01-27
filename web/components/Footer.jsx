@@ -4,11 +4,14 @@ import linkedin from '../public/linkedin.svg';
 import github from '../public/github.svg';
 import gmail from '../public/gmail.svg';
 import Link from 'next/link';
+import { useTranslation } from 'next-i18next';
 
 const Footer = () => {
+  const { t } = useTranslation('common');
+
   return (
     <footer className={styles.footer}>
-      <h1>Let's work together</h1>
+      <h1>{t('footer')}</h1>
       <div>
         <Link href='https://www.linkedin.com/in/luis-eduardo-calder%C3%B3n-miranda/' target='_blank'>
           <Image 

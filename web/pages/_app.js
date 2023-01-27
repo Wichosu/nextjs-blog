@@ -1,15 +1,27 @@
 import '../styles/styles.scss';
 import Layout from '../components/Layout';
 import { Inter } from '@next/font/google';
+import { appWithTranslation } from 'next-i18next';
+import { serverSideTranslations } from 'next-i18next/serverSideTranslations'
 
 const inter = Inter({ subsets: ['latin'] })
 
-export default function MyApp({ Component, pageProps }){
+const MyApp = ({ Component, pageProps }) => {
   return (
-    <main className={inter.className}>
+    <div className={inter.className}>
       <Layout>
         <Component {...pageProps} />
       </Layout>
-    </main>
+    </div>
   )
 }
+
+export async function getStaticProps({locale}){
+  return{
+    props:{
+      ...(await serverSideTranslations(locale, ['common']))
+    }
+  }
+}
+
+export default appWithTranslation(MyApp);

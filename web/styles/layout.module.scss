@@ -4,7 +4,13 @@
   flex-direction: column;
   gap: 2rem 0;
 
-  main{
-    margin: 0 4rem;
+  .main{
+    display: flex;
+    flex-direction: column;
+
+    main{
+      margin: 0 4rem;
+    }
   }
+
 }

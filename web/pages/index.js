@@ -6,12 +6,15 @@ import profilePic from '../public/examen1.png'; //temp profile pic
 import imageUrlBuilder from '@sanity/image-url';
 import Arrow from '../public/Arrow.svg';
 import styles from '../styles/index.module.scss';
+import { serverSideTranslations } from 'next-i18next/serverSideTranslations';
+import { useTranslation } from 'next-i18next';
 
 function urlFor(source) {
   return imageUrlBuilder(client).image(source)
 }
 
 const Index = ({posts}) => {
+  const { t } = useTranslation('common')
   return (
     <div className={styles.index}>
       <div className={styles.title}>
@@ -86,7 +89,7 @@ const Index = ({posts}) => {
   )
 }
 
-export async function getStaticProps(){
+export async function getStaticProps({ locale }){
   const posts = await client.fetch(
     groq`*[_type == "post" && publishedAt < now()]{
       _id,
@@ -103,7 +106,8 @@ export async function getStaticProps(){
   
   return {
     props: {
-      posts
+      posts,
+      ...(await serverSideTranslations(locale, ['common'])),
     }
   }
 }
