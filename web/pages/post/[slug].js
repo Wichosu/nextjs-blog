@@ -6,6 +6,8 @@ import Link from 'next/link';
 import styles from '../../styles/post.module.scss';
 import Image from 'next/image';
 import Arrow from '../../public/Arrow.svg';
+import { serverSideTranslations } from 'next-i18next/serverSideTranslations';
+import { useTranslation } from 'next-i18next';
 
 function urlFor(source) {
   return imageUrlBuilder(client).image(source)
@@ -38,24 +40,24 @@ const Post = ({post}) => {
     url
   } = post
 
+  const { t } = useTranslation('common')
+
   return (
     <article className={styles.article}>
       <div>
-        <div>
-          <Link href='/'>
+        <div className={styles.title}>
+          <Link href='/' className={styles.arrowContainer}>
             <Image 
               src={Arrow} 
               alt='Go back'
               className={styles.arrow}
             />
           </Link>
-        </div>
-        <div className={styles.title}>
           <h1>{title}</h1>
-          <span>By {name}</span>
+          <span>{t('by')} {name}</span>
           {url
-          ? <Link href={url} target="_blank" className={styles.link}>Check it out!</Link>
-          : <span>Deploy not available</span>
+          ? <Link href={url} target="_blank" className={styles.link}>{t('deploy')}</Link>
+          : <span>{t('no-deploy')}</span>
           }
         </div>
       </div>
@@ -82,15 +84,6 @@ const Post = ({post}) => {
   )
 }
 
-const query = groq`*[_type == "post" && slug.current == $slug][0]{
-  title,
-  "name": author->name,
-  "categories": categories[]->title,
-  mainImage,
-  body,
-  url
-}`
-
 export async function getStaticPaths(){
   const paths = await client.fetch(
     groq`*[_type == "post" && defined(slug.current)][].slug.current`
@@ -102,18 +95,40 @@ export async function getStaticPaths(){
   }
 }
 
-export async function getStaticProps(context){
+export async function getStaticProps({ params, locale}){
+  const standardQuery = groq`*[_type == "post" && slug.current == $slug][0]{
+    title,
+    "name": author->name,
+    "categories": categories[]->title,
+    mainImage,
+    body,
+    url
+  }`
+
+  const translationQuery = groq`*[_type == "post-${locale}" && post->slug.current == $slug][0]{
+    title,
+    "name": post->author->name,
+    "categories": post->categories[]->title,
+    "mainImage": post->mainImage,
+    body,
+    "url": post->url
+  }`
+
   //It's important to default the Slug so that it doesn't return "undefined"
-  const { slug = "" } = context.params
-  const post = await client.fetch(
-    query,
-    { slug }
-  )
+  const { slug = "" } = params
+  let post = ""
+  
+  if(locale === "en"){
+    post = await client.fetch(standardQuery, {slug})
+  } else{
+    post = await client.fetch(translationQuery, {slug})
+  }
 
   return {
     props: {
-      post
-    }
+      post,
+      ...(await serverSideTranslations(locale, ['common'])),
+    },
   }
 }
 

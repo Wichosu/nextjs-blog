@@ -15,11 +15,12 @@ function urlFor(source) {
 
 const Index = ({posts}) => {
   const { t } = useTranslation('common')
+
   return (
     <div className={styles.index}>
       <div className={styles.title}>
-        <h1>Thoughts on my projects</h1>
-        <h2>A personal sight on what I've developed</h2>
+        <h1>{t('title')}</h1>
+        <h2>{t('subtitle')}</h2>
       </div>
       <div className={styles.hero}>
         <Image
@@ -29,7 +30,7 @@ const Index = ({posts}) => {
         />
         <div>
           <h3>Luis Eduardo Calderón Miranda (aka Wicho)</h3>
-          <p>A web developer who tries to improve its skills by building tiny projects</p>
+          <p>{t('about-me')}</p>
         </div>
       </div>
       {posts.length > 0 && 
@@ -76,8 +77,8 @@ const Index = ({posts}) => {
                   {categories.map(category => <li key={category}>{category}</li>)}
                 </ul>
                 {url
-                ? <Link href={url} target="_blank" className={styles.linkDeploy}>Check it out!</Link>
-                : <span>Deploy not available</span>
+                ? <Link href={url} target="_blank" className={styles.linkDeploy}>{t('deploy')}</Link>
+                : <span>{t('no-deploy')}</span>
                 }
               </div>
             )
@@ -90,20 +91,38 @@ const Index = ({posts}) => {
 }
 
 export async function getStaticProps({ locale }){
-  const posts = await client.fetch(
-    groq`*[_type == "post" && publishedAt < now()]{
-      _id,
-      title,
-      "author": author->name,
-      mainImage,
-      slug,
-      publishedAt,
-      "categories": categories[]->title,
-      description,
-      url
-    } | order(publishedAt desc)`
-  )
-  
+  const standardQuery = groq`*[_type == "post" && publishedAt < now()]{
+    _id,
+    title,
+    "author": author->name,
+    mainImage,
+    slug,
+    publishedAt,
+    "categories": categories[]->title,
+    description,
+    url
+  } | order(publishedAt desc)`
+
+  const translationQuery = groq`*[_type == "post-${locale}" && post->publishedAt < now()]{
+    _id,
+    title,
+    "author": post->author->name,
+    "mainImage": post->mainImage,
+    "slug": post->slug,
+    "publishedAt": post->publishedAt,
+    "categories": post->categories[]->title,
+    description,
+    "url": post->url
+  } | order(post->publishedAt desc)`
+
+  let posts = ''
+
+  if(locale === 'en'){
+    posts = await client.fetch(standardQuery)
+  } else{
+    posts = await client.fetch(translationQuery)
+  }
+
   return {
     props: {
       posts,

@@ -1,3 +1,9 @@
 {
-  "footer": "Let's work together"
+  "title": "Thoughts on my projects",
+  "subtitle": "A personal sight on what I've developed",
+  "about-me": "A web developer who tries to improve its skills by building tiny projects",
+  "deploy": "Check it out!",
+  "no-deploy": "Deploy not available",
+  "footer": "Let's work together",
+  "by": "By"
 }

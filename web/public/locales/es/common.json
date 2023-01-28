@@ -1,3 +1,9 @@
 {
-  "footer": "Trabajemos juntos"
+  "title": "Mis proyectos",
+  "subtitle": "Un vistazo personal a lo que he desarollado",
+  "about-me": "Un desarrollador web que trata de mejorar a base de proyectos",
+  "deploy": "Echale un ojo!",
+  "no-deploy": "Despliegue no disponible",
+  "footer": "Trabajemos juntos",
+  "by": "Por"
 }

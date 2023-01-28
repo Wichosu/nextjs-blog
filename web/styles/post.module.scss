@@ -2,22 +2,27 @@ $soft-black: #374151;
 $link: #1d4ed8;
 
 .article{
-  margin-top: 1.5rem;
   display: flex;
   flex-direction: column;
   gap: 2rem;
-
-  .arrow{
-    width: 2rem;
-    height: 2rem;
-    transform: rotate(180deg);
-  }
 
   .title{
     display: flex;
     flex-direction: column;
     gap: 0.5rem 0;
     text-align: center;
+    position: relative;
+
+    .arrowContainer{
+      position: absolute;
+      top: 0;
+
+      .arrow{
+        width: 2rem;
+        height: 2rem;
+        transform: rotate(180deg);
+      }
+    }
 
     h1{
       font-size: 2.5rem;
