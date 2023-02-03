@@ -115,7 +115,7 @@ export async function getStaticProps({ params, locale}){
   }`
 
   //It's important to default the Slug so that it doesn't return "undefined"
-  const { slug = "" } = params
+  const { slug = null } = params
   let post = null 
   
   if(locale === "en"){
