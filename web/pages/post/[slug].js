@@ -53,7 +53,7 @@ const Post = ({post}) => {
               className={styles.arrow}
             />
           </Link>
-          <h1>{title || ''}</h1>
+          <h1>{title}</h1>
           <span>{t('by')} {name}</span>
           {url
           ? <Link href={url} target="_blank" className={styles.link}>{t('deploy')}</Link>
@@ -116,7 +116,7 @@ export async function getStaticProps({ params, locale}){
 
   //It's important to default the Slug so that it doesn't return "undefined"
   const { slug = "" } = params
-  let post = ""
+  let post = null 
   
   if(locale === "en"){
     post = await client.fetch(standardQuery, {slug})
