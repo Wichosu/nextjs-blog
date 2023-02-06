@@ -105,7 +105,7 @@ export async function getStaticProps(context){
     url
   }`
 
-  const translationQuery = groq`*[_type == "post-${locale}" && post->slug.current == $slug][0]{
+  const translationQuery = groq`*[_type == "post-${context.locale}" && post->slug.current == $slug][0]{
     title,
     "name": post->author->name,
     "categories": post->categories[]->title,
@@ -121,6 +121,7 @@ export async function getStaticProps(context){
   return {
     props: {
       post,
+      ...(await serverSideTranslations(context.locale, ['common'])),
     },
   }
 }
