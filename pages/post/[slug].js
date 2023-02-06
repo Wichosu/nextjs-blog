@@ -34,10 +34,10 @@ const Post = ({post}) => {
   const  { 
     title = '', 
     name = '', 
-    categories,
-    mainImage,
+    categories = '',
+    mainImage = '',
     body = [],
-    url
+    url = ''
   } = post
 
   const { t } = useTranslation('common')
