@@ -84,20 +84,25 @@ const Post = ({post}) => {
   )
 }
 
-export async function getStaticPaths(){
-  let paths = await client.fetch(
+export async function getStaticPaths({ locales }){
+  const paths = await client.fetch(
     groq`*[_type == "post" && defined(slug.current)][].slug.current`
   )
-  
-  let esPaths = await client.fetch(
-    groq`*[_type == "post-es" && defined(post->slug.current)][].slug.current`
-  )
 
-  paths.concat(esPaths);
+  paths.flatMap((slug) => {
+    return locales.map((locale) => {
+      return {
+        params: {
+          slug: slug,
+        },
+        locale: locale,
+      };
+    });
+  });
 
   return {
-    paths: paths.map((slug) => ({params: {slug}})),
-    fallback: false,
+    paths: paths,
+    fallback: true,
   }
 }
 
