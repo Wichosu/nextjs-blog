@@ -91,7 +91,7 @@ export async function getStaticPaths(){
 
   return {
     paths: paths.map((slug) => ({params: {slug}})),
-    fallback: false,
+    fallback: true,
   }
 }
 
@@ -116,7 +116,12 @@ export async function getStaticProps(context){
 
   //It's important to default the Slug so that it doesn't return "undefined"
   const { slug = '' } = context.params
-  const post = await client.fetch(standardQuery, {slug})
+  let post = ''
+  if(context.locale === 'en'){
+    post = await client.fetch(standardQuery, {slug})
+  } else {
+    post = await client.fetch(translationQuery, {slug})
+  }
 
   return {
     props: {
