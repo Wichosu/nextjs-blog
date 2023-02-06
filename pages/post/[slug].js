@@ -93,9 +93,9 @@ export async function getStaticPaths({ locales }){
     return locales.map((locale) => {
       return {
         params: {
-          slug: slug,
+          slug,
         },
-        locale: locale,
+        locale,
       };
     });
   });
