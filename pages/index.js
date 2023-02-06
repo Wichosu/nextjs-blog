@@ -1,6 +1,6 @@
 import Link from 'next/link';
 import groq from 'groq';
-import client from '../client';
+import client from '/lib/client';
 import Image from 'next/image';
 import profilePic from '../public/examen1.png'; //temp profile pic
 import imageUrlBuilder from '@sanity/image-url';

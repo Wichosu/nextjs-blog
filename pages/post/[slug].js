@@ -1,4 +1,4 @@
-import client from '../../client';
+import client from '/lib/client';
 import groq from 'groq';
 import imageUrlBuilder from '@sanity/image-url';
 import { PortableText } from '@portabletext/react';
@@ -32,12 +32,12 @@ const ptComponents = {
 
 const Post = ({post}) => {
   const  { 
-    title = '', 
-    name = '', 
+    title = 'No Title', 
+    name = 'No Author', 
     categories = '',
-    mainImage = '',
+    mainImage = 'No Image',
     body = [],
-    url = ''
+    url
   } = post
 
   const { t } = useTranslation('common')
@@ -53,7 +53,7 @@ const Post = ({post}) => {
               className={styles.arrow}
             />
           </Link>
-          <h1>'hola'</h1>
+          <h1>{title}</h1>
           <span>{t('by')} {name}</span>
           {url
           ? <Link href={url} target="_blank" className={styles.link}>{t('deploy')}</Link>
