@@ -115,13 +115,7 @@ export async function getStaticProps({ locale }){
     "url": post->url
   } | order(post->publishedAt desc)`
 
-  let posts = {} 
-
-  if(locale === 'en'){
-    posts = await client.fetch(standardQuery)
-  } else{
-    posts = await client.fetch(translationQuery)
-  }
+  posts = await client.fetch(standardQuery)
 
   return {
     props: {
