@@ -91,11 +91,11 @@ export async function getStaticPaths(){
 
   return {
     paths: paths.map((slug) => ({params: {slug}})),
-    fallback: true,
+    fallback: false,
   }
 }
 
-export async function getStaticProps({ params, locale}){
+export async function getStaticProps(context){
   const standardQuery = groq`*[_type == "post" && slug.current == $slug][0]{
     title,
     "name": author->name,
@@ -115,13 +115,12 @@ export async function getStaticProps({ params, locale}){
   }`
 
   //It's important to default the Slug so that it doesn't return "undefined"
-  const { slug = '' } = params
+  const { slug = '' } = context.params
   const post = await client.fetch(standardQuery, {slug})
 
   return {
     props: {
       post,
-      ...(await serverSideTranslations(locale, ['common'])),
     },
   }
 }
