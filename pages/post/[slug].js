@@ -53,7 +53,7 @@ const Post = ({post}) => {
               className={styles.arrow}
             />
           </Link>
-          <h1>{title}</h1>
+          <h1>'hola'</h1>
           <span>{t('by')} {name}</span>
           {url
           ? <Link href={url} target="_blank" className={styles.link}>{t('deploy')}</Link>
