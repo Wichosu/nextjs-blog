@@ -115,14 +115,8 @@ export async function getStaticProps({ params, locale}){
   }`
 
   //It's important to default the Slug so that it doesn't return "undefined"
-  const { slug = null } = params
-  let post = await client.fetch(standardQuery, {slug}) 
-  
-  if(locale === "en"){
-    post = await client.fetch(standardQuery, {slug})
-  } else{
-    post = await client.fetch(translationQuery, {slug})
-  }
+  const { slug = '' } = params
+  const post = await client.fetch(standardQuery, {slug})
 
   return {
     props: {
